@@ -1,0 +1,25 @@
+{
+  "name": "vercel-deploy",
+  "version": "0.0.0",
+  "description": "This is the description of the plugin.",
+  "strapi": {
+    "name": "vercel-deploy",
+    "description": "Description of Vercel Deploy plugin",
+    "kind": "plugin",
+    "displayName": "Vercel Deploy"
+  },
+  "dependencies": {},
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "maintainers": [
+    {
+      "name": "A Strapi developer"
+    }
+  ],
+  "engines": {
+    "node": ">=14.19.1 <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
