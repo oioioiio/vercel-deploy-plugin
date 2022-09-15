@@ -1,14 +1,21 @@
 {
   "name": "vercel-deploy",
-  "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "version": "1.0.0",
+  "description": "Plugin for vercel deploy strapi(multi websites)",
   "strapi": {
     "name": "vercel-deploy",
     "description": "Description of Vercel Deploy plugin",
     "kind": "plugin",
     "displayName": "Vercel Deploy"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ban-kos-Technology-OU/vercel-deploy-plugin"
+  },
   "dependencies": {},
+  "peerDependencies": {
+    "@strapi/strapi":"4.0.0"
+  },
   "author": {
     "name": "A Strapi developer"
   },

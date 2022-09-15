@@ -11,7 +11,7 @@ import { BaseHeaderLayout } from "@strapi/design-system/Layout";
 import { LoadingIndicatorPage } from "@strapi/helper-plugin";
 import { Link } from "@strapi/design-system/Link";
 import ArrowLeft from "@strapi/icons/ArrowLeft";
-
+import { getConfig } from "../../utils/api";
 import Notifications from "../../components/Notifications";
 import SymmetricBox from "../../components/SymmetricBox";
 import DeployButton from "../../components/DeployButton";
@@ -19,6 +19,7 @@ import DeploymentsContainer from "../../components/DeploymentsContainer";
 import DeploymentsEmptyState from "../../components/DeploymentsEmptyState";
 import { useDeployAvailability } from "../../hooks/useDeployAvailability";
 import { useFormattedMessage } from "../../hooks/useFormattedMessage";
+import { useEffect } from 'react'
 
 
 const getDeploymentsEmptyStateType = (
@@ -39,10 +40,28 @@ const getDeploymentsEmptyStateType = (
   return listDeployAvailability;
 };
 
+
 const HomePage = () => {
   const headerTitle = useFormattedMessage("home-page.header.title");
   const headerSubtitle = useFormattedMessage("home-page.header.subtitle");
   const [website, setWebsite] = useState("holadinero-es")
+  const initialConfig = {};
+  const [pluginConfig, setPluginConfig] = useState(initialConfig);
+  console.log(pluginConfig)
+
+  useEffect(() => {
+    getConfig()
+      .then((response) => {
+        setPluginConfig(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "[vercel-deploy] error while retrieving plugin config",
+          error
+        );
+        setPluginConfig({});
+      })
+  }, [setPluginConfig]);
 
   const [isLoadingAvailability, availability, apiError] =
     useDeployAvailability(website);
@@ -65,6 +84,7 @@ const HomePage = () => {
     setUseDeploymentsPolling(true);
   };
 
+
   return (
     <Notifications>
       <div style={{padding:"20px"}}>
@@ -72,9 +92,9 @@ const HomePage = () => {
         <select name="websites" id="websites" onChange={(e) => {
           setWebsite(e.target.value)
         }}>
-          <option value="holadinero-es">ES</option>
-          <option value="holadinero-mx">MX</option>
-          <option value="holadinero-pl">PL</option>
+           {pluginConfig.websites && pluginConfig.websites.map((site,i) => (
+              <option key={i} value={site.appFilter}>{site.label}</option>
+            ))}
         </select>
       </div>
       <Box background="neutral100">

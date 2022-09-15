@@ -36,7 +36,7 @@ const BoxField = ({ fieldName, fieldHint, children }) => {
   );
 };
 
-const SettingsContainer = ({website}) => {
+const SettingsContainer = ({website,setConfig}) => {
   const deployHookPlaceholder = useFormattedMessage(
     "settings-page.deploy-hook.placeholder"
   );
@@ -68,6 +68,7 @@ const SettingsContainer = ({website}) => {
     getConfig()
       .then((response) => {
         setPluginConfig(response.data);
+        setConfig(response.data)
       })
       .catch((error) => {
         console.error(
@@ -222,6 +223,8 @@ const SettingsPage = () => {
   const headerSubtitle = useFormattedMessage("settings-page.header.subtitle");
   const [website, setWebsite] = useState("holadinero-es")
 
+  const [config, setConfig] = useState({})
+
   return (
     <>
       <Box background="neutral100">
@@ -230,14 +233,14 @@ const SettingsPage = () => {
           <select name="websites" id="websites" onChange={(e) => {
             setWebsite(e.target.value)
           }}>
-            <option value="holadinero-es">ES</option>
-            <option value="holadinero-mx">MX</option>
-            <option value="holadinero-pl">PL</option>
+            {config.websites && config.websites.map((site,i) => (
+              <option key={i} value={site.appFilter}>{site.label}</option>
+            ))}
           </select>
         </div>
         <HeaderLayout title={headerTitle} subtitle={headerSubtitle} as="h2" />
       </Box>
-      <SettingsContainer website={website} />
+      <SettingsContainer website={website} setConfig={setConfig} />
     </>
   );
 };
