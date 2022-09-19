@@ -71,6 +71,31 @@ module.exports = ({ env }) => ({
 });
 ```
 
+### Webpack.EnvironmentPlugin Configuration
+
+```
+```
+
+- Rename ./src/admin/webpack.config.example.js to ./src/admin/webpack.config.js.
+- Add the webpack.EnvironmentPlugin, which reads from the current process.env and assigns then to frontend, my full file is below.
+
+```
+"use strict";
+
+/* eslint-disable no-unused-vars */
+module.exports = (config, webpack) => {
+  // Note: we provide webpack above so you should not `require` it
+  // Perform customizations to webpack config
+
+  config.plugins.push(
+    new webpack.EnvironmentPlugin(["NODE_ENV", "VERCEL_DEPLOY_PLUGIN_APP_FILTER"])
+  );
+
+  // Important: return the modified config
+  return config;
+};
+```
+
 ### Environment Configuration
 
 You shouldn't disclose the api token and the deploy hook url for security reasons. Therefore, you shouldn't add these values to versioning in a public git repository. A suggested solution is to use environment variables. Example:
@@ -82,8 +107,8 @@ module.exports = ({ env }) => ({
     config: {
       websites:[
        {
-          deployHook: "process.env.VERCEL_DEPLOY_PLUGIN_HOOK_ENG",
-          appFilter: "VERCEL_DEPLOY_PLUGIN_APP_FILTER_ENG",
+          deployHook: "process.env.VERCEL_DEPLOY_PLUGIN_HOOK",  
+          appFilter: "VERCEL_DEPLOY_PLUGIN_APP_FILTER", /// same as webpack config (default)
           label:"your website name"
         },
         {
@@ -105,7 +130,7 @@ module.exports = ({ env }) => ({
 For local development, you can add the config properties in your .env file:
 
 ```
-VERCEL_DEPLOY_PLUGIN_HOOK_ENG="https://api.vercel.com/v1/integrations/deploy/prj_<deploy-hook>"
+VERCEL_DEPLOY_PLUGIN_HOOK="https://api.vercel.com/v1/integrations/deploy/prj_<deploy-hook>"
 VERCEL_DEPLOY_PLUGIN_API_TOKEN="<vercel-api-token>"
 VERCEL_DEPLOY_PLUGIN_APP_FILTER="your-app-name-on-vercel"
 VERCEL_DEPLOY_PLUGIN_TEAM_FILTER="your-team-id-on-vercel"
