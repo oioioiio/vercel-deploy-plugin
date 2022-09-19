@@ -47,7 +47,7 @@ const HomePage = () => {
   const [website, setWebsite] = useState("holadinero-es")
   const initialConfig = {};
   const [pluginConfig, setPluginConfig] = useState(initialConfig);
-  console.log(pluginConfig)
+
 
   useEffect(() => {
     getConfig()
