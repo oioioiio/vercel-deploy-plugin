@@ -5,7 +5,7 @@ import { Button } from "@strapi/design-system/Button";
 import { Loader } from "@strapi/design-system/Loader";
 import Plus from "@strapi/icons/Plus";
 
-import SymmetricBox from "../../components/SymmetricBox";
+import SymmetricBox from "../SymmetricBox";
 import FormattedMessage from "../FormattedMessage";
 import { getErrorNotification } from "./ErrorUtils";
 import { runDeploy } from "../../utils/api";
