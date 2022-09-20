@@ -1,6 +1,6 @@
 {
   "name": "vercel-deploy",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Plugin for vercel deploy strapi(multi websites)",
   "strapi": {
     "name": "vercel-deploy",

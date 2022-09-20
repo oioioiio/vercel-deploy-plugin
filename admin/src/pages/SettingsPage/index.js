@@ -221,7 +221,7 @@ const SettingsContainer = ({website,setConfig}) => {
 const SettingsPage = () => {
   const headerTitle = useFormattedMessage("settings-page.header.title");
   const headerSubtitle = useFormattedMessage("settings-page.header.subtitle");
-  const [website, setWebsite] = useState(process.env.VERCEL_DEPLOY_PLUGIN_APP_FILTER)
+  const [website, setWebsite] = useState(VERCEL_DEPLOY_PLUGIN_APP_FILTER)
 
   const [config, setConfig] = useState({})
 

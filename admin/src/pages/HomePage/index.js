@@ -44,7 +44,7 @@ const getDeploymentsEmptyStateType = (
 const HomePage = () => {
   const headerTitle = useFormattedMessage("home-page.header.title");
   const headerSubtitle = useFormattedMessage("home-page.header.subtitle");
-  const [website, setWebsite] = useState(process.env.VERCEL_DEPLOY_PLUGIN_APP_FILTER)
+  const [website, setWebsite] = useState(VERCEL_DEPLOY_PLUGIN_APP_FILTER)
   const initialConfig = {};
   const [pluginConfig, setPluginConfig] = useState(initialConfig);
 
