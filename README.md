@@ -88,7 +88,9 @@ module.exports = (config, webpack) => {
   // Perform customizations to webpack config
 
   config.plugins.push(
-    new webpack.EnvironmentPlugin(["NODE_ENV", "VERCEL_DEPLOY_PLUGIN_APP_FILTER"])
+    new webpack.DefinePlugin({
+      VERCEL_DEPLOY_PLUGIN_APP_FILTER:JSON.stringify(process.env.VERCEL_DEPLOY_PLUGIN_APP_FILTER)
+    })
   );
 
   // Important: return the modified config
